@@ -1,0 +1,138 @@
+definitions:
+  models.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.LoginResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  models.Matrix:
+    properties:
+      data:
+        items:
+          items:
+            type: number
+          type: array
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /factorize:
+    post:
+      consumes:
+      - application/json
+      description: Recibe una matriz rectangular rota la matriz y devuelve la factorización
+        QR de dicha matriz. Luego envía los datos resultantes a una API de Node.js.
+      parameters:
+      - description: Matriz rectangular a factorizar
+        in: body
+        name: matrix
+        required: true
+        schema:
+          $ref: '#/definitions/models.Matrix'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Factores Q y R de la matriz"//
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Factorización QR de una matriz
+      tags:
+      - Matrices
+  /getRotateMatrix:
+    get:
+      consumes:
+      - application/json
+      description: Recibe una matriz rectangular, rota la matriz y devuelve la matriz
+        rotada.
+      parameters:
+      - description: Matriz rectangular a rotar
+        in: body
+        name: matrix
+        required: true
+        schema:
+          $ref: '#/definitions/models.Matrix'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Matriz rotada
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Rotación de una matriz
+      tags:
+      - Matrices
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Recibe un json con email y password para iniciar sesión y devuelve
+        un token JWT.
+      parameters:
+      - description: Datos de inicio de sesión
+        in: body
+        name: loginRequest
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Token JWT
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "400":
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Inicio de Sesión
+      tags:
+      - Login
+swagger: "2.0"
