@@ -6,7 +6,7 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-// Funcion que factoriza en QR usando la Libreria gonun
+// Funcion para factorizar en QR
 func QRFactorization(matrix [][]float64) ([][]float64, [][]float64, error) {
 	rows := len(matrix)
 	if rows == 0 {
