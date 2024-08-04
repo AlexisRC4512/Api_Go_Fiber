@@ -34,7 +34,11 @@ func FactorizeMatrix(c *fiber.Ctx) error {
 	}
 	matrixRotate := services.RotateMatrix(matrix.Data)
 
-	Q, R := services.QRFactorization(matrixRotate)
+	Q, R, err := services.QRFactorization(matrixRotate)
+
+	if len(Q) == 0 && len(R) == 0 {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "La matriz que ingreso no se puede factorizar en QR"})
+	}
 	fmt.Println("Matrix Rotate:")
 	for _, row := range matrixRotate {
 		fmt.Println(row)
