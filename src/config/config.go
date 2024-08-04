@@ -9,7 +9,7 @@ import (
 func InitConfig() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	//#Para usar la ruta local usar esto :    "../config" en CONFIG_PATH  y "/root" para crear el dokerfile
+	//#Para usar la ruta local usar esto :    "../config" en CONFIG_PATH  y usar "/root" para crear el dokerfile
 	viper.AddConfigPath("/root")
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error leyendo archivo de configuración: %s", err)

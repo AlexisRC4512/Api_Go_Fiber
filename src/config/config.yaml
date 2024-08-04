@@ -2,6 +2,7 @@
 JWT_SECRET: 5a2e441e03c08b7a15619fd0df6f347d
 #Puerto para levantar la app
 PORT: 3000
-#Ruta del endpoint de la api Node js usar http://localhost:4000/stats si prueba en su local  o esta para probar la api entorno cloud  "https://node-app-latest.onrender.com/stats"
 #para usar Docker http://node-express-api:4000/stats
+#Ruta del endpoint de la api Node js usar http://localhost:4000/stats si prueba en su local  o esta para probar la api entorno cloud  "https://node-app-latest.onrender.com/stats"
+
 ENDPOINT_NODE_API: "http://node-express-api:4000/stats"
